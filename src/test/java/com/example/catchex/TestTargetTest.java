@@ -17,7 +17,18 @@ public class TestTargetTest {
 
         catchException(tgt).someMethod(5);
 
-        assert caughtException() instanceof MyException;
+        final Exception caughtException = caughtException();
+
+        System.out.println("caughtException.getClass(): " + caughtException.getClass());
+        System.out.println("caughtException.getMessage(): " + caughtException.getMessage());
+        IllegalArgumentException illegalArgEx = (IllegalArgumentException) caughtException();
+        System.out.println("illegalArgEx.getCause(): " + illegalArgEx.getCause());
+        System.out.println("illegalArgEx.getSuppressed(): " + illegalArgEx.getSuppressed());
+
+        System.out.println("Stacktrace:\n");
+        caughtException.printStackTrace();
+
+        assert caughtException instanceof MyException;
     }
 
     @Test
